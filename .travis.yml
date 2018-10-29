@@ -6,4 +6,6 @@ before install:
 install: true
   - npm install
 script:
+  - ssh-keygen -R $SSH_IP
+  - ssh-keyscan -H $SSH_IP >> ~/.ssh/known_hosts
   - ssh $SSH_USER@$SSH_IP 'bash $ROOT_DIR/deploy.sh'

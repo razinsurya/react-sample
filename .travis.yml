@@ -8,4 +8,4 @@ install: true
 script:
   - ssh-keygen -R $SSH_IP
   - ssh-keyscan -H $SSH_IP >> ~/.ssh/known_hosts
-  - ssh -v $SSH_USER@$SSH_IP DIR=$ROOT_DIR 'bash -s' < deploy.sh'
+  - ssh -v $SSH_USER@$SSH_IP DIR=$ROOT_DIR 'bash -s' < deploy.sh

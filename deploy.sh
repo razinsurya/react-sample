@@ -1,7 +1,7 @@
 eval "$(ssh-agent -s)" &&
 ssh-add -k ~/.ssh/id_rsa &&
 
-cd $ROOT_DIR &&
+cd /var/www/react &&
 git pull && 
 npm install &&
 npm run build

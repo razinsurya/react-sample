@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "6"
+before install:
+  - sudo apt-get update -y
+install: true
+  - npm install
+script:
+  - ssh $SSH_USER@$SSH_IP 'bash $ROOT_DIR/deploy.sh'

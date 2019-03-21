@@ -25,6 +25,7 @@ script:
 #- cat .env
 #- mkdir logs
 #- ls
+- npm run build
 - npm run test
 after_success:
 - npm run coverage

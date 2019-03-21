@@ -18,7 +18,6 @@ before_script:
 - chmod +x aws-iam-authenticator
 - sudo mv aws-iam-authenticator /usr/local/bin
 - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.10.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-- mkdir kube
 - cp kubeconfig kube/
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:

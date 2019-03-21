@@ -15,4 +15,4 @@ sed -i -e 's|AWS_STAGING_ACCESS_KEY|'"${AWS_STAGING_ACCESS_KEY}"'|g' ~/.aws/cred
 sed -i -e 's|AWS_STAGING_SECRET_KEY|'"${AWS_STAGING_SECRET_KEY}"'|g' ~/.aws/credentials
 
 # update apps deployment
-kubectl --kubeconfig kubeconfig set image deployment/${APP_K8S_DEPLOYMENT_NAME} ${APP_K8S_CONTAINER_NAME}=sepulsa/reak:staging-${TRAVIS_BUILD_NUMBER}
+kubectl --kubeconfig kubeconfig set image deployment/${APP_K8S_DEPLOYMENT_NAME} ${APP_K8S_CONTAINER_NAME}=ajisepulsa/reak:staging-${TRAVIS_BUILD_NUMBER}

@@ -1,12 +1,40 @@
-#coba
 language: node_js
 node_js:
-  - "6"
-before_install:
-  - openssl aes-256-cbc -K $encrypted_2e5e9e7c9627_key -iv $encrypted_2e5e9e7c9627_iv -in deploy_rsa.enc -out deploy_rsa -d
-install: true
-  - npm install
+- '10'
+os: linux
+sudo: enabled
+services:
+- docker
+env:
+  global:
+  - TRAVIS_ALLOW_FAILURE=false
+install:
+- npm install
+before_script:
+- sleep 15
+- sleep 15
+- mkdir ~/.aws
+- cp credentials ~/.aws/
+- curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_linux_amd64
+- chmod +x aws-iam-authenticator
+- sudo mv aws-iam-authenticator /usr/local/bin
+- curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.10.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+- mkdir kube
+- cp kubeconfig kube/
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:
-  - chmod 600 deploy_rsa
-  - ssh-keyscan -H $SSH_IP >> ~/.ssh/known_hosts
-  - ssh -v -i deploy_rsa $SSH_USER@$SSH_IP DIR=$ROOT_DIR 'bash -s' < deploy.sh
+#- cp travis.env .env
+#- cat .env
+#- mkdir logs
+#- ls
+- npm run test
+after_success:
+- npm run coverage
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: 
+    - bash deploy.sh
+  on:
+    all_branches: true
